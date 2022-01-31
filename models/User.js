@@ -8,6 +8,7 @@ let userSchema = new Schema({
 	phone:    {type:String,reqiured:true},
 	password: {type:String,reqiured:true},
 	token:    {type:String,required:false},
+	contacts: {type:Array, required:false},
 	groupId:  {type:Schema.Types.ObjectId, ref:group}
 })
 

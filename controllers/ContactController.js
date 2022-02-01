@@ -8,19 +8,18 @@ exports.createContact = async(req, res) => {
         });
     }
 
+    if (!req.body.email) {
+        return res.send({
+            message: "User Email is required"
+        });
+    }
+
     if (!req.body.phone) {
         return res.send({
             message: "Phone is required"
         });
     }
-
-    if (!req.body.token || !jwt.verify(req.body.token, 'secret')) {
-        return res.send({
-            message: "Authentication Failed, token invalid."
-        });
-    }
-
-    var user = await User.findOneAndUpdate({token: req.body.token},{$push :{contacts:[{name:req.body.name,phone:req.body.phone}]}});
+    var user = await User.findOneAndUpdate({email: req.body.email},{$push :{contacts:[{name:req.body.name,phone:req.body.phone}]}});
 
     user = await user.save();
     if (user) {

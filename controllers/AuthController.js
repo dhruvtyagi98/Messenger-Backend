@@ -93,7 +93,7 @@ exports.login = async(req, res) => {
 	if (user) {
 		if(PasswordHash.verify(req.body.password, user.password)){
 			var token = jwt.sign({ 
-				exp: Math.floor(Date.now() / 1000) + (60 * 60), 
+				// exp: Math.floor(Date.now() / 1000) + (60 * 60), 
 				data: {name: user.name, email: user.email} 
 			}, 'secret');
 

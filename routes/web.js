@@ -2,6 +2,7 @@ const express = require("express")
 const AuthController = require('../controllers/AuthController');
 const ContactController = require('../controllers/ContactController');
 const UserController = require('../controllers/UserController');
+const GroupController = require('../controllers/GroupController');
 const checkToken = require('../middlewares/CheckTokenMiddleware');
 
 const router = express.Router();
@@ -14,5 +15,7 @@ router.post('/register', jsonParser, AuthController.createUser);
 router.post('/login', jsonParser, AuthController.login);
 router.post('/contacts', jsonParser, checkToken, ContactController.createContact);
 router.post('/user', jsonParser, checkToken, UserController.getUser);
+router.post('/group', jsonParser, checkToken, GroupController.createGroup);
+router.post('/group/create', jsonParser, checkToken, GroupController.addToGroup);
 
 module.exports = router

@@ -100,7 +100,8 @@ exports.login = async(req, res) => {
 			var user = await User.findOneAndUpdate({email: req.body.email},{$set :{token : token}});
 
 			return res.send({
-				token: token
+				token: token,
+				email: user.email
 			});
 		}
 		else{

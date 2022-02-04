@@ -9,7 +9,8 @@ let userSchema = new Schema({
 	password: {type:String,reqiured:true},
 	token:    {type:String,required:false},
 	contacts: {type:Array, required:false},
-	groupId:  {type:Array}
+	groupId:  {type:Array},
+	chatId:   {type:Array}
 })
 
 module.exports= mongoose.model('User',userSchema)

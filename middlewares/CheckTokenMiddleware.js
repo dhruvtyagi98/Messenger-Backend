@@ -1,19 +1,35 @@
 var jwt   = require('jsonwebtoken');
 
 module.exports = function(req, res, next){
-    if (!req.body.token) {
+    tokenGet = req.query.token;
+    tokenPost = req.body.token;
+    if (!tokenGet || tokenPost) {
         return res.send({
             message: "Authentication Failed, token invalid."
         });
     }
-    jwt.verify(req.body.token, 'secret', function (err, decoded) {
-        if(err){
-            return res.send({
-                message: "Authentication Failed, token invalid."
-            });
-        }
-        else{
-            next();
-        }
-    });
+    if (tokenPost) {
+        jwt.verify(tokenPost, 'secret', function (err, decoded) {
+            if(err){
+                return res.send({
+                    message: "Authentication Failed, token invalid."
+                });
+            }
+            else{
+                next();
+            }
+        });
+    }
+    if (tokenGet) {
+        jwt.verify(tokenGet, 'secret', function (err, decoded) {
+            if(err){
+                return res.send({
+                    message: "Authentication Failed, token invalid."
+                });
+            }
+            else{
+                next();
+            }
+        });
+    }
 }

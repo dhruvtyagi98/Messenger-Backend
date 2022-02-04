@@ -67,7 +67,6 @@ exports.createUser = async(req, res) => {
 }
 
 exports.login = async(req, res) => {
-	console.log(req.body.email);
 	var user = await User.findOne({
 		email: req.body.email
 	});
